@@ -7,16 +7,46 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
+    
+    @State var places: [ApiNetwork.Place]? = nil
+    
+    @State var loading: Bool = true
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if loading {
+            Spacer()
+            ProgressView().tint(.cyan)
+                .controlSize(.extraLarge)
+                .padding(.top, 300)
         }
-        .padding()
+        NavigationStack {
+            VStack {
+                List(places ?? []) { place in
+                    ZStack {
+                        PlaceCard(place: place)
+                        NavigationLink(destination: PlaceDetails()) {
+                            EmptyView()
+                        }.opacity(0)
+                    }
+                }
+                .listStyle(.plain)
+                .listRowBackground(Color.red)
+                
+            }
+            .task {
+                do {
+                    places = try await ApiNetwork().getAllTouristicPlaces()
+                   
+                } catch {
+                    print("Error al obtener los lugares: \(error)") // Evita usar `throw` aquí
+                }
+                loading = false
+            }
+        }
     }
+    
 }
 
 #Preview {
