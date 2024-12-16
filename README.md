@@ -17,4 +17,4 @@ Things I've used in this project.
 - Ignoring safe area
 - Scrollable views
 
-<video src='./app-demo.mp4' style="max-width: 400px" width=180></video>
+<img src="./app-demo.gif" style="max-width: 400px">
