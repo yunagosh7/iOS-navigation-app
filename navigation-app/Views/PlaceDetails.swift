@@ -21,87 +21,91 @@ struct PlaceDetails: View {
     
     
     var body: some View {
-        VStack(spacing: 0) {
             
-            WebImage(url: URL(string: previewPlace.mainImage))
-                .resizable()
-                .indicator(.activity)
-                .transition(.fade(duration: 0.5))
-                .scaledToFill()
-                .ignoresSafeArea()
-                .frame(height: 200)
-            
-            VStack {
-                Text(previewPlace.name)
-                    .bold()
-                    .font(.system(size: 32))
-                    .padding(.bottom, 8)
+            VStack(spacing: 0) {
                 
-                Text(previewPlace.description)
-                    .foregroundColor(.gray)
-                    .font(.system(size: 16))
+                WebImage(url: URL(string: previewPlace.mainImage))
+                    .resizable()
+                    .indicator(.activity)
+                    .transition(.fade(duration: 0.5))
+                    .scaledToFill()
+                    .ignoresSafeArea()
+                    .frame(height: 250)
                 
-                Spacer()
-                    .frame(height: 40)
-                ZStack {
-                    Rectangle()
-                        .frame(height: 70)
-                        .foregroundColor(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(.lightGray, lineWidth: 2)
-                        )
-                    HStack {
-                        
-                        Spacer()
-                        VStack {
-                            Text("\(String(format: "%.2f", previewPlace.score))")
-                            
-                            HStack(spacing: 0) {
-                                ForEach(UIUtils.shared.getFilledStars(score: previewPlace.score), id: \.id) { star in
-                                    switch star.state {
-                                    case .filled:
-                                        Image(systemName: "star.fill")
-                                    case .half:
-                                        Image(systemName: "star.lefthalf.fill")
-                                    case .empty:
-                                        Image(systemName: "star")
-                                            .foregroundColor(.gray)
-                                    }
-                                    
-                                }
-                            }
-                            .font(.system(size: 16))
-                        }
-                        Spacer()
-                        Divider()
-                            .frame(height: 50)
-                            .background(.gray)
-                        Spacer()
-                        Text("\(detailedPlace?.reviews.count ?? 0) reviews")
-                        Spacer()
-                    }
-                    .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                VStack {
+                    Text(previewPlace.name)
+                        .bold()
+                        .font(.system(size: 32))
+                        .padding(.bottom, 8)
                     
-                }
-            }
-            .padding(EdgeInsets(top: 32, leading: 16, bottom: 16, trailing: 16))
-            
-            ScrollView(.horizontal) {
-                LazyHStack {
-                    ForEach(detailedPlace?.reviews ?? [], id: \.id) {review in
-                        ReviewCard(review: review)
+                    Text(previewPlace.description)
+                        .foregroundColor(.gray)
+                        .font(.system(size: 16))
+                    
+                    Spacer()
+                        .frame(height: 40)
+                    ZStack {
+                        Rectangle()
+                            .frame(height: 70)
+                            .foregroundColor(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(.lightGray, lineWidth: 2)
+                            )
+                        HStack {
+                            
+                            Spacer()
+                            VStack {
+                                Text("\(String(format: "%.2f", previewPlace.score))")
+                                
+                                HStack(spacing: 0) {
+                                    ForEach(UIUtils.shared.getFilledStars(score: previewPlace.score), id: \.id) { star in
+                                        switch star.state {
+                                        case .filled:
+                                            Image(systemName: "star.fill")
+                                        case .half:
+                                            Image(systemName: "star.lefthalf.fill")
+                                        case .empty:
+                                            Image(systemName: "star")
+                                                .foregroundColor(.gray)
+                                        }
+                                        
+                                    }
+                                }
+                                .font(.system(size: 16))
+                            }
+                            Spacer()
+                            Divider()
+                                .frame(height: 50)
+                                .background(.gray)
+                            Spacer()
+                            Text("\(detailedPlace?.reviews.count ?? 0) reviews")
+                            Spacer()
+                        }
+                        .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                        
                     }
                 }
-                .listStyle(.plain)
-                .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-            }
+                .padding(EdgeInsets(top: 32, leading: 16, bottom: 16, trailing: 16))
                 
-           
-          
-            Spacer()
-        }
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(detailedPlace?.reviews ?? [], id: \.id) {review in
+                            ReviewCard(review: review)
+                        }
+                    }
+                    .listStyle(.plain)
+                    .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+                }
+                .scrollTargetLayout()
+                    
+               
+              
+                Spacer()
+            }
+      
+        .edgesIgnoringSafeArea(.top)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
                                 Button(action: {
