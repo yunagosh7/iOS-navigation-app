@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6E4161E12D0D04FB00875289 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6E4161E02D0D04FB00875289 /* SDWebImageSwiftUI */; };
+		6EB6C7B02D106AE600528908 /* ToosieSlide in Frameworks */ = {isa = PBXBuildFile; productRef = 6EB6C7AF2D106AE600528908 /* ToosieSlide */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E4161E12D0D04FB00875289 /* SDWebImageSwiftUI in Frameworks */,
+				6EB6C7B02D106AE600528908 /* ToosieSlide in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +120,7 @@
 			name = "navigation-app";
 			packageProductDependencies = (
 				6E4161E02D0D04FB00875289 /* SDWebImageSwiftUI */,
+				6EB6C7AF2D106AE600528908 /* ToosieSlide */,
 			);
 			productName = "navigation-app";
 			productReference = 6EB2F6BC2D0C9F03009AE03B /* navigation-app.app */;
@@ -203,6 +206,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				6E4161DF2D0D015400875289 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				6EB6C7AE2D106AE600528908 /* XCRemoteSwiftPackageReference "ToosieSlide" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6EB2F6BD2D0C9F03009AE03B /* Products */;
@@ -571,6 +575,14 @@
 				minimumVersion = 3.1.3;
 			};
 		};
+		6EB6C7AE2D106AE600528908 /* XCRemoteSwiftPackageReference "ToosieSlide" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TheInkedEngineer/ToosieSlide";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -578,6 +590,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6E4161DF2D0D015400875289 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		6EB6C7AF2D106AE600528908 /* ToosieSlide */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6EB6C7AE2D106AE600528908 /* XCRemoteSwiftPackageReference "ToosieSlide" */;
+			productName = ToosieSlide;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

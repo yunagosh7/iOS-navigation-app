@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var places: [ApiNetwork.Place]? = nil
+    @State var places: [ApiNetwork.PreviewPlace]? = nil
     
     @State var loading: Bool = true
     
@@ -23,16 +23,17 @@ struct ContentView: View {
         }
         NavigationStack {
             VStack {
-                List(places ?? []) { place in
-                    ZStack {
+                List(places ?? []) { place in	
+                    ZStack {	
                         PlaceCard(place: place)
-                        NavigationLink(destination: PlaceDetails()) {
+                        NavigationLink(destination: PlaceDetails(
+                            previewPlace: place
+                        )) {
                             EmptyView()
                         }.opacity(0)
                     }
                 }
                 .listStyle(.plain)
-                .listRowBackground(Color.red)
                 
             }
             .task {
@@ -40,7 +41,7 @@ struct ContentView: View {
                     places = try await ApiNetwork().getAllTouristicPlaces()
                    
                 } catch {
-                    print("Error al obtener los lugares: \(error)") // Evita usar `throw` aquí
+                    print("Error al obtener los lugares: \(error)")
                 }
                 loading = false
             }
